@@ -7,7 +7,7 @@ if nargin < 4
     maxiter=16;
 end
 
-pixels=zeros(w,h);
+pixels=zeros(h,w);
 
 i=sqrt(-1); % Not really necessary, defined by default
 

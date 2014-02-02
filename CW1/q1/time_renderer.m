@@ -15,9 +15,9 @@ function [t,n,w,h,c,maxiter] = time_renderer(renderer,w,h,c,maxiter)
 
     end
     
-    for w_iterator = 1:size(w,2)
-        for c_iterator = 1:size(c,2)
-            for max_iterator = 1:size(maxiter,2)
+    for w_iterator = w
+        for c_iterator = c
+            for max_iterator = maxiter
                 n_temp = w(w_iterator)*h(w_iterator);
                 tic;
                 renderer(w(w_iterator),h(w_iterator),c(c_iterator),maxiter(max_iterator));

@@ -36,7 +36,7 @@ while 1
     % Or take c from current mouse location 
     CP = get (gca, 'CurrentPoint');
     mx=(CP(1,1)/w)*2-1;
-    my=(CP(1,2)/w)*2-1;
+    my=(CP(1,2)/h)*2-1;
     m=mx+my*1i;
     if abs(m)<=1
         c=m;
