@@ -46,11 +46,9 @@ function [t,n,w,h,c,maxiter] = time_renderer(renderer,w,h,c,maxiter)
         else
             maxiter_s(i).f1 = maxiter(i);
         end
-        if i > size(renderer,2)
-            renderer_s(i).f1 = renderer{size(renderer,2)};
-        else
-            renderer_s(i).f1 = renderer{i};
-        end
+        
+            renderer_s(i).f1 = renderer;
+        
     end
         
     
