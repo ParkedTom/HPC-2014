@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -15,10 +15,11 @@
 
 /* Function Declarations */
 static void julia_v4_mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]);
+MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties(void);
 
 /* Variable Definitions */
 emlrtContext emlrtContextGlobal = { true, false, EMLRT_VERSION_INFO, NULL, "julia_v4", NULL, false, {2045744189U,2170104910U,2743257031U,4284093946U}, NULL };
-void *emlrtRootTLSGlobal = NULL;
+emlrtCTX emlrtRootTLSGlobal = NULL;
 
 /* Function Definitions */
 static void julia_v4_mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
@@ -28,9 +29,8 @@ static void julia_v4_mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxAr
   int n = 0;
   int nOutputs = (nlhs < 1 ? 1 : nlhs);
   int nInputs = nrhs;
-  emlrtStack stack={0,0,0}; /* Root of the run-time stack. */
   /* Module initialization. */
-  julia_v4_initialize(&stack, &emlrtContextGlobal);
+  julia_v4_initialize(&emlrtContextGlobal);
   /* Check for proper number of arguments. */
   if (nrhs != 3) {
     emlrtErrMsgIdAndTxt(emlrtRootTLSGlobal, "EMLRT:runTime:WrongNumberOfInputs", 5, mxINT32_CLASS, 3, mxCHAR_CLASS, 8, "julia_v4");
@@ -42,19 +42,18 @@ static void julia_v4_mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxAr
     inputs[n] = (mxArray *)prhs[n];
   }
   /* Call the function. */
-  julia_v4_api(&stack, (const mxArray**)inputs, (const mxArray**)outputs);
+  julia_v4_api((const mxArray**)inputs, (const mxArray**)outputs);
   /* Copy over outputs to the caller. */
   for (n = 0; n < nOutputs; ++n) {
     plhs[n] = emlrtReturnArrayR2009a(outputs[n]);
   }
   /* Module finalization. */
-  julia_v4_terminate(&stack);
+  julia_v4_terminate();
 }
 
 void julia_v4_atexit_wrapper(void)
 {
-  emlrtStack stack={0,0,0}; /* Root of the run-time stack. */
-   julia_v4_atexit(&stack);
+   julia_v4_atexit();
 }
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
@@ -63,5 +62,31 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
   mexAtExit(julia_v4_atexit_wrapper);
   /* Dispatch the entry-point. */
   julia_v4_mexFunction(nlhs, plhs, nrhs, prhs);
+}
+
+mxArray *emlrtMexFcnProperties(void)
+{
+  const char *mexProperties[] = {
+    "Version",
+    "ResolvedFunctions",
+    "EntryPoints"};
+  const char *epProperties[] = {
+    "Name",
+    "NumberOfInputs",
+    "NumberOfOutputs",
+    "ConstantInputs"};
+  mxArray *xResult = mxCreateStructMatrix(1,1,3,mexProperties);
+  mxArray *xEntryPoints = mxCreateStructMatrix(1,1,4,epProperties);
+  mxArray *xInputs = NULL;
+  xInputs = mxCreateLogicalMatrix(1, 3);
+  mxSetFieldByNumber(xEntryPoints, 0, 0, mxCreateString("julia_v4"));
+  mxSetFieldByNumber(xEntryPoints, 0, 1, mxCreateDoubleScalar(3));
+  mxSetFieldByNumber(xEntryPoints, 0, 2, mxCreateDoubleScalar(2));
+  mxSetFieldByNumber(xEntryPoints, 0, 3, xInputs);
+  mxSetFieldByNumber(xResult, 0, 0, mxCreateString("8.1.0.604 (R2013a)"));
+  mxSetFieldByNumber(xResult, 0, 1, (mxArray*)emlrtMexFcnResolvedFunctionsInfo());
+  mxSetFieldByNumber(xResult, 0, 2, xEntryPoints);
+
+  return xResult;
 }
 /* End of code generation (julia_v4_mex.c) */

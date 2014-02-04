@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_initialize'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -14,13 +14,12 @@
 #include "julia_v4_data.h"
 
 /* Function Definitions */
-void julia_v4_initialize(emlrtStack *sp, emlrtContext *aContext)
+void julia_v4_initialize(emlrtContext *aContext)
 {
   emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2012b();
   emlrtCreateRootTLS(&emlrtRootTLSGlobal, aContext, NULL, 1);
-  sp->tls = emlrtRootTLSGlobal;
-  emlrtClearAllocCountR2012b(sp, FALSE, 0U, 0);
-  emlrtEnterRtStackR2012b(sp);
+  emlrtClearAllocCountR2012b(emlrtRootTLSGlobal, FALSE, 0U, 0);
+  emlrtEnterRtStackR2012b(emlrtRootTLSGlobal);
   emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
 }
 

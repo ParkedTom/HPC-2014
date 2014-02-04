@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_api'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -23,6 +23,7 @@
 #include "julia_v4_types.h"
 
 /* Function Declarations */
-extern void julia_v4_api(emlrtStack *sp, const mxArray * const prhs[3], const mxArray *plhs[2]);
+extern const mxArray *emlrtMexFcnResolvedFunctionsInfo(void);
+extern void julia_v4_api(const mxArray * const prhs[3], const mxArray *plhs[2]);
 #endif
 /* End of code generation (julia_v4_api.h) */

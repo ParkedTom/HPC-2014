@@ -1,10 +1,6 @@
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="4" WIDTH="100%%" BGCOLOR="#ffffff"><TR><TD>
 <B>Generated Source Files</B>
 </TD></TR><TR></TR>
-<tr><td><a href="abs_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="abs_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">abs.c</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="abs_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="abs_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">abs.h</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="_coder_julia_v4_1_info_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="_coder_julia_v4_1_info_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">_coder_julia_v4_1_info.c</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="_coder_julia_v4_1_info_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="_coder_julia_v4_1_info_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">_coder_julia_v4_1_info.h</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="julia_v4_1_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="julia_v4_1_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">julia_v4_1.c</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="julia_v4_1_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="julia_v4_1_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">julia_v4_1.h</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="julia_v4_1_api_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="julia_v4_1_api_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">julia_v4_1_api.c</a><span> </span></td></tr><tr></tr>
@@ -19,10 +15,6 @@
 <tr><td><a href="julia_v4_1_terminate_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="julia_v4_1_terminate_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">julia_v4_1_terminate.c</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="julia_v4_1_terminate_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="julia_v4_1_terminate_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">julia_v4_1_terminate.h</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="julia_v4_1_types_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="julia_v4_1_types_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">julia_v4_1_types.h</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="mpower_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="mpower_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">mpower.c</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="mpower_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="mpower_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">mpower.h</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="power_c.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="power_c.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">power.c</a><span> </span></td></tr><tr></tr>
-<tr><td><a href="power_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="power_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">power.h</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="rt_nonfinite_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="rt_nonfinite_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">rt_nonfinite.h</a><span> </span></td></tr><tr></tr>
 <tr><td><a href="rtwtypes_h.html" onclick="if (top) if (top.tocHiliteMe) top.tocHiliteMe(window, this, false);" id="rtwtypes_h.html" target="rtwreport_document_frame" name="rtwIdGenFileLinks">rtwtypes.h</a><span> </span></td></tr><tr></tr>
 </table>

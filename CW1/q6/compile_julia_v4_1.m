@@ -6,4 +6,4 @@ maxiter = coder.typeof(0);
 
 
 
-codegen julia_v4_1 -config cfg -args {vz, c, maxiter} -O disable:inline
+codegen julia_v4_1 -config cfg -args {vz, c, maxiter}

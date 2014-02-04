@@ -2,7 +2,7 @@ function [t,n,w,h,c,maxiter] = time_renderer(renderer,w,h,c,maxiter)
     
     % set up defaults
     if nargin < 2
-        w=round(2.^(4:0.5:10));
+        w=round(2.^(4:0.5:12));
     end
     if nargin < 3
         h=w;

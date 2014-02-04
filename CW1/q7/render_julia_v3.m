@@ -13,7 +13,7 @@ if nargin < 5
     maxiter=16;
 end
 
-pixels=zeros(w,h);
+pixels=zeros(h,w);
 
 i=sqrt(-1); % Not really necessary, defined by default
 
@@ -22,6 +22,7 @@ dx=2/w;
 oy=-1;
 dy=2/h;
 y = 1:h;
+
 parfor x=1:w
         vz = (ox+x*dx) + (oy+y.*dy).*i;
         pixels(y,x) = juliaproc(vz, c, maxiter);

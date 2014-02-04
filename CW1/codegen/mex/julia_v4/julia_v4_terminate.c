@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_terminate'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -13,18 +13,17 @@
 #include "julia_v4_terminate.h"
 
 /* Function Definitions */
-void julia_v4_atexit(emlrtStack *sp)
+void julia_v4_atexit(void)
 {
   emlrtCreateRootTLS(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1);
-  sp->tls = emlrtRootTLSGlobal;
-  emlrtEnterRtStackR2012b(sp);
-  emlrtLeaveRtStackR2012b(sp);
+  emlrtEnterRtStackR2012b(emlrtRootTLSGlobal);
+  emlrtLeaveRtStackR2012b(emlrtRootTLSGlobal);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
 }
 
-void julia_v4_terminate(emlrtStack *sp)
+void julia_v4_terminate(void)
 {
-  emlrtLeaveRtStackR2012b(sp);
+  emlrtLeaveRtStackR2012b(emlrtRootTLSGlobal);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
 }
 

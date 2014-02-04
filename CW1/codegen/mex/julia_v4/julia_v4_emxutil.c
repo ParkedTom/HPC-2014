@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_emxutil'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -13,8 +13,8 @@
 #include "julia_v4_emxutil.h"
 
 /* Function Definitions */
-void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
-  oldNumel, int32_T elementSize, const emlrtRTEInfo *srcLocation)
+void emxEnsureCapacity(emxArray__common *emxArray, int32_T oldNumel, int32_T
+  elementSize, const emlrtRTEInfo *srcLocation)
 {
   int32_T newNumel;
   int32_T i;
@@ -22,7 +22,7 @@ void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
   newNumel = 1;
   for (i = 0; i < emxArray->numDimensions; i++) {
     newNumel = (int32_T)emlrtSizeMulR2012b((uint32_T)newNumel, (uint32_T)
-      emxArray->size[i], srcLocation, sp);
+      emxArray->size[i], srcLocation, emlrtRootTLSGlobal);
   }
 
   if (newNumel > emxArray->allocatedSize) {
@@ -32,12 +32,13 @@ void emxEnsureCapacity(const emlrtStack *sp, emxArray__common *emxArray, int32_T
     }
 
     while (i < newNumel) {
-      i = (int32_T)emlrtSizeMulR2012b((uint32_T)i, 2U, srcLocation, sp);
+      i = (int32_T)emlrtSizeMulR2012b((uint32_T)i, 2U, srcLocation,
+        emlrtRootTLSGlobal);
     }
 
     newData = emlrtCallocMex((uint32_T)i, (uint32_T)elementSize);
     if (newData == NULL) {
-      emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+      emlrtHeapAllocationErrorR2012b(srcLocation, emlrtRootTLSGlobal);
     }
 
     if (emxArray->data != NULL) {
@@ -79,20 +80,19 @@ void emxFree_real_T(emxArray_real_T **pEmxArray)
   }
 }
 
-void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray, int32_T
-                     numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                     doPush)
+void emxInit_creal_T(emxArray_creal_T **pEmxArray, int32_T numDimensions, const
+                     emlrtRTEInfo *srcLocation, boolean_T doPush)
 {
   emxArray_creal_T *emxArray;
   int32_T i;
   *pEmxArray = (emxArray_creal_T *)emlrtMallocMex(sizeof(emxArray_creal_T));
   if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+    emlrtHeapAllocationErrorR2012b(srcLocation, emlrtRootTLSGlobal);
   }
 
   if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_creal_T);
+    emlrtPushHeapReferenceStackR2012b(emlrtRootTLSGlobal, (void *)pEmxArray,
+      (void (*)(void *))emxFree_creal_T);
   }
 
   emxArray = *pEmxArray;
@@ -101,7 +101,7 @@ void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray, int32_T
   emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
     * numDimensions));
   if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+    emlrtHeapAllocationErrorR2012b(srcLocation, emlrtRootTLSGlobal);
   }
 
   emxArray->allocatedSize = 0;
@@ -111,20 +111,19 @@ void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray, int32_T
   }
 }
 
-void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
-                    numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                    doPush)
+void emxInit_real_T(emxArray_real_T **pEmxArray, int32_T numDimensions, const
+                    emlrtRTEInfo *srcLocation, boolean_T doPush)
 {
   emxArray_real_T *emxArray;
   int32_T i;
   *pEmxArray = (emxArray_real_T *)emlrtMallocMex(sizeof(emxArray_real_T));
   if ((void *)*pEmxArray == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+    emlrtHeapAllocationErrorR2012b(srcLocation, emlrtRootTLSGlobal);
   }
 
   if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_real_T);
+    emlrtPushHeapReferenceStackR2012b(emlrtRootTLSGlobal, (void *)pEmxArray,
+      (void (*)(void *))emxFree_real_T);
   }
 
   emxArray = *pEmxArray;
@@ -133,7 +132,7 @@ void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
   emxArray->size = (int32_T *)emlrtMallocMex((uint32_T)(sizeof(int32_T)
     * numDimensions));
   if ((void *)emxArray->size == NULL) {
-    emlrtHeapAllocationErrorR2012b(srcLocation, sp);
+    emlrtHeapAllocationErrorR2012b(srcLocation, emlrtRootTLSGlobal);
   }
 
   emxArray->allocatedSize = 0;

@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_1_initialize'
  *
- * C source code generated on: Tue Feb  4 00:21:00 2014
+ * C source code generated on: Tue Feb 04 20:09:25 2014
  *
  */
 
@@ -23,6 +23,6 @@
 #include "julia_v4_1_types.h"
 
 /* Function Declarations */
-extern void julia_v4_1_initialize(emlrtStack *sp, emlrtContext *aContext);
+extern void julia_v4_1_initialize(emlrtContext *aContext);
 #endif
 /* End of code generation (julia_v4_1_initialize.h) */

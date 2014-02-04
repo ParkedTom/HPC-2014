@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_data'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -24,11 +24,5 @@
 
 /* Variable Declarations */
 extern const volatile char_T *emlrtBreakCheckR2012bFlagVar;
-extern emlrtRSInfo e_emlrtRSI;
-extern emlrtRSInfo f_emlrtRSI;
-extern emlrtRSInfo g_emlrtRSI;
-extern emlrtRSInfo h_emlrtRSI;
-extern emlrtRSInfo i_emlrtRSI;
-extern emlrtRSInfo j_emlrtRSI;
 #endif
 /* End of code generation (julia_v4_data.h) */

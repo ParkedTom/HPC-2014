@@ -1,20 +1,14 @@
 function [iter,vz] = julia_v4_1(vz, c, maxiter)%#codegen
-% assert(isa(vz,'double'));
-% assert(isa(c,'double'));
-% assert(isa(maxiter, 'double'));
-
 iter=ones(1,length(vz)); %define array of iterations
 
-for i = 1:length(vz) %over each element of the array do the julia iterations
-    while iter(i)<maxiter
-        if abs(vz(i)) > 1
+while max(iter) < maxiter
+        mask = abs(vz) <= 1;
+        if ~any(mask)
             break;
         end
-            vz(i)=vz(i)^2 + c; 
-            iter(i)=iter(i)+1;
-    end
-    
-       
+        vz(mask)=vz(mask).^2 + c;
+        iter = iter + +mask;
+        
 end
 
 end

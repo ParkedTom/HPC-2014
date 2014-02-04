@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -23,6 +23,6 @@
 #include "julia_v4_types.h"
 
 /* Function Declarations */
-extern void julia_v4(const emlrtStack *sp, emxArray_creal_T *vz, const creal_T c, real_T maxiter, emxArray_real_T *iter);
+extern void julia_v4(emxArray_creal_T *vz, const creal_T c, real_T maxiter, emxArray_real_T *iter);
 #endif
 /* End of code generation (julia_v4.h) */

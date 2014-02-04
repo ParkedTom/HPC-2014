@@ -1,6 +1,6 @@
-START_DIR = /Users/Tom/Documents/EE4/High\ Performance\ Computing\ for\ Engineers/HPC-2014/CW1
+START_DIR = H:\Desktop\GitHub\HPC-2014\CW1
 
-MATLAB_ROOT = /Applications/MATLAB_R2013b.app
+MATLAB_ROOT = C:\matlab\R2013a
 MAKEFILE = julia_v4_mex.mk
 
 include julia_v4_mex.mki
@@ -13,11 +13,10 @@ SRC_FILES =  \
 	julia_v4.c \
 	julia_v4_api.c \
 	julia_v4_emxutil.c \
-	julia_v4_mex.c \
-	_coder_julia_v4_info.c
+	julia_v4_mex.c
 
 MEX_FILE_NAME_WO_EXT = julia_v4_mex
-MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexmaci64
+MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexw64
 TARGET = $(MEX_FILE_NAME)
 
 SYS_LIBS = 
@@ -25,119 +24,91 @@ SYS_LIBS =
 
 #
 #====================================================================
-# gmake makefile fragment for building MEX functions using Unix
-# Copyright 2007-2013 The MathWorks, Inc.
+# gmake makefile fragment for building MEX functions using MSVC
+# Copyright 2007-2012 The MathWorks, Inc.
 #====================================================================
 #
-OBJEXT = o
+SHELL = cmd
+OBJEXT = obj
+CC = $(COMPILER)
+LD = $(LINKER)
 .SUFFIXES: .$(OBJEXT)
 
 OBJLISTC = $(SRC_FILES:.c=.$(OBJEXT))
-OBJLISTCPP  = $(OBJLISTC:.cpp=.$(OBJEXT))
-OBJLIST  = $(OBJLISTCPP:.cu=.$(OBJEXT))
+OBJLIST  = $(OBJLISTC:.cpp=.$(OBJEXT))
 
-target: $(TARGET)
+ifneq (,$(findstring $(EMC_COMPILER),msvc80 msvc90 msvc100 msvc100free msvc110 msvcsdk))
+  TARGETMT = $(TARGET).manifest
+  MEX = $(TARGETMT)
+  STRICTFP = /fp:strict
+else
+  MEX = $(TARGET)
+  STRICTFP = /Op
+endif
 
-ML_INCLUDES = -I "$(MATLAB_ROOT)/simulink/include"
-ML_INCLUDES+= -I "$(MATLAB_ROOT)/toolbox/shared/simtargets"
-SYS_INCLUDE = $(ML_INCLUDES)
+target: $(MEX)
+
+MATLAB_INCLUDES = /I "$(MATLAB_ROOT)\simulink\include"
+MATLAB_INCLUDES+= /I "$(MATLAB_ROOT)\toolbox\shared\simtargets"
+MATLAB_INCLUDES+= /I "$(MATLAB_ROOT)\rtw\ext_mode\common"
+MATLAB_INCLUDES+= /I "$(MATLAB_ROOT)\rtw\c\src\ext_mode\common"
+SYS_INCLUDE = $(MATLAB_INCLUDES)
 
 # Additional includes
 
-SYS_INCLUDE += -I "$(START_DIR)"
-SYS_INCLUDE += -I "$(START_DIR)/codegen/mex/julia_v4"
-SYS_INCLUDE += -I "$(START_DIR)/codegen/mex/julia_v4/interface"
-SYS_INCLUDE += -I "$(MATLAB_ROOT)/extern/include"
-SYS_INCLUDE += -I "."
+SYS_INCLUDE += /I "$(START_DIR)"
+SYS_INCLUDE += /I "$(START_DIR)\codegen\mex\julia_v4"
+SYS_INCLUDE += /I "$(MATLAB_ROOT)\extern\include"
 
-EML_LIBS = -lemlrt -lcovrt -lut -lmwmathutil -lmwblas 
-SYS_LIBS += $(CLIBS) $(EML_LIBS)
+DIRECTIVES = $(MEX_FILE_NAME_WO_EXT)_mex.arf
 
-
-EXPORTFILE = $(MEX_FILE_NAME_WO_EXT)_mex.map
-ifeq ($(Arch),maci)
-  EXPORTOPT = -Wl,-exported_symbols_list,$(EXPORTFILE)
-  COMP_FLAGS = -c $(CFLAGS) -DMX_COMPAT_32
-  CXX_FLAGS = -c $(CXXFLAGS) -DMX_COMPAT_32
-  LINK_FLAGS = $(filter-out %mexFunction.map, $(LDFLAGS))
-else ifeq ($(Arch),maci64)
-  EXPORTOPT = -Wl,-exported_symbols_list,$(EXPORTFILE)
-  COMP_FLAGS = -c $(CFLAGS) -DMX_COMPAT_32
-  CXX_FLAGS = -c $(CXXFLAGS) -DMX_COMPAT_32
-  LINK_FLAGS = $(filter-out %mexFunction.map, $(LDFLAGS))
+COMP_FLAGS = $(COMPFLAGS) $(OMPFLAGS) -DMX_COMPAT_32
+LINK_FLAGS = $(filter-out /export:mexFunction, $(LINKFLAGS))
+LINK_FLAGS += /NODEFAULTLIB:LIBCMT
+ifeq ($(EMC_CONFIG),optim)
+  COMP_FLAGS += $(OPTIMFLAGS) $(STRICTFP)
+  LINK_FLAGS += $(LINKOPTIMFLAGS)
 else
-  EXPORTOPT = -Wl,--version-script,$(EXPORTFILE)
-  COMP_FLAGS = -c $(CFLAGS) -DMX_COMPAT_32 $(OMPFLAGS)
-  CXX_FLAGS = -c $(CXXFLAGS) -DMX_COMPAT_32 $(OMPFLAGS)
-  LINK_FLAGS = $(filter-out %mexFunction.map, $(LDFLAGS)) 
+  COMP_FLAGS += $(DEBUGFLAGS)
+  LINK_FLAGS += $(LINKDEBUGFLAGS)
 endif
 LINK_FLAGS += $(OMPLINKFLAGS)
-ifeq ($(Arch),maci)
-  LINK_FLAGS += -L$(MATLAB_ROOT)/sys/os/maci
-endif
-ifeq ($(EMC_CONFIG),optim)
-  ifeq ($(Arch),mac)
-    COMP_FLAGS += $(CDEBUGFLAGS)
-    CXX_FLAGS += $(CXXDEBUGFLAGS)
-  else
-    COMP_FLAGS += $(COPTIMFLAGS)
-    CXX_FLAGS += $(CXXOPTIMFLAGS)
-  endif
-  LINK_FLAGS += $(LDOPTIMFLAGS)
-else
-  COMP_FLAGS += $(CDEBUGFLAGS)
-  CXX_FLAGS += $(CXXDEBUGFLAGS)
-  LINK_FLAGS += $(LDDEBUGFLAGS)
-endif
-LINK_FLAGS += -o $(TARGET)
+LINK_FLAGS += /OUT:$(TARGET)
 LINK_FLAGS += 
 
-CCFLAGS =  $(COMP_FLAGS) $(USER_INCLUDE) $(SYS_INCLUDE)
-CPPFLAGS =   $(CXX_FLAGS) $(USER_INCLUDE) $(SYS_INCLUDE)
+CFLAGS =  $(COMP_FLAGS) $(USER_INCLUDE) $(SYS_INCLUDE)
+CPPFLAGS =  $(CFLAGS)
 
 %.$(OBJEXT) : %.c
-	$(CC) $(CCFLAGS) "$<"
+	$(CC) $(CFLAGS) "$<"
 
 %.$(OBJEXT) : %.cpp
-	$(CXX) $(CPPFLAGS) "$<"
+	$(CC) $(CPPFLAGS) "$<"
 
 # Additional sources
 
 %.$(OBJEXT) : $(START_DIR)/%.c
-	$(CC) $(CCFLAGS) "$<"
+	$(CC) $(CFLAGS) "$<"
 
-%.$(OBJEXT) : $(START_DIR)/codegen/mex/julia_v4/%.c
-	$(CC) $(CCFLAGS) "$<"
-
-%.$(OBJEXT) : interface/%.c
-	$(CC) $(CCFLAGS) "$<"
-
-
-
-%.$(OBJEXT) : $(START_DIR)/%.cu
-	$(CC) $(CCFLAGS) "$<"
-
-%.$(OBJEXT) : $(START_DIR)/codegen/mex/julia_v4/%.cu
-	$(CC) $(CCFLAGS) "$<"
-
-%.$(OBJEXT) : interface/%.cu
-	$(CC) $(CCFLAGS) "$<"
+%.$(OBJEXT) : $(START_DIR)\codegen\mex\julia_v4/%.c
+	$(CC) $(CFLAGS) "$<"
 
 
 
 %.$(OBJEXT) : $(START_DIR)/%.cpp
-	$(CXX) $(CPPFLAGS) "$<"
+	$(CC) $(CPPFLAGS) "$<"
 
-%.$(OBJEXT) : $(START_DIR)/codegen/mex/julia_v4/%.cpp
-	$(CXX) $(CPPFLAGS) "$<"
-
-%.$(OBJEXT) : interface/%.cpp
-	$(CXX) $(CPPFLAGS) "$<"
+%.$(OBJEXT) : $(START_DIR)\codegen\mex\julia_v4/%.cpp
+	$(CC) $(CPPFLAGS) "$<"
 
 
 
-$(TARGET): $(OBJLIST) $(MAKEFILE)
-	$(LD) $(EXPORTOPT) $(LINK_FLAGS) $(OBJLIST) $(SYS_LIBS)
+$(TARGET): $(OBJLIST) $(MAKEFILE) $(DIRECTIVES)
+	$(LD) $(LINK_FLAGS) $(OBJLIST) $(USER_LIBS) $(SYS_LIBS) @$(DIRECTIVES)
+	@cmd /C "echo Build completed using compiler $(EMC_COMPILER)"
+
+$(TARGETMT): $(TARGET)
+	mt -outputresource:"$(TARGET);2" -manifest "$(TARGET).manifest"
 
 #====================================================================
 

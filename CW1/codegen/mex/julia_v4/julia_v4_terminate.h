@@ -3,7 +3,7 @@
  *
  * Code generation for function 'julia_v4_terminate'
  *
- * C source code generated on: Tue Feb  4 00:09:06 2014
+ * C source code generated on: Tue Feb 04 20:09:16 2014
  *
  */
 
@@ -23,7 +23,7 @@
 #include "julia_v4_types.h"
 
 /* Function Declarations */
-extern void julia_v4_atexit(emlrtStack *sp);
-extern void julia_v4_terminate(emlrtStack *sp);
+extern void julia_v4_atexit(void);
+extern void julia_v4_terminate(void);
 #endif
 /* End of code generation (julia_v4_terminate.h) */
