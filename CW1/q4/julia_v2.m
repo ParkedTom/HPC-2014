@@ -7,8 +7,7 @@ while max(iter) < maxiter
         if ~any(mask)
             break;
         end
-        vz_temp=vz.^2 + c;
-        vz = +mask.*vz_temp + +(~mask).*vz;
+        vz(mask)=vz(mask).^2 + c;
         iter = iter + +mask;
         
 end
