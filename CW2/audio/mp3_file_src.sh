@@ -1,2 +1,2 @@
 #!/bin/bash
-../local/bin/lame --silent --mp3input -t --decode  $1 -
+../local/bin/lame --silent --mp3input --decode -t  $1 -

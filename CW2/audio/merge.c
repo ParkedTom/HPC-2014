@@ -4,6 +4,9 @@
 #include <errno.h>
 #include <string.h>
 #include <stdint.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include <unistd.h>
 #define BUFFER_SIZE 512
@@ -17,54 +20,55 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	
-	FILE * f1;
-	FILE * f2;
+	int f1;
+	int f2;
 	
-	f1 = fopen(argv[1], 'r');
-	f2 = fopen(argv[2], 'r');
+	f1 = open(argv[1], O_RDONLY);
+	f2 = open(argv[2], O_RDONLY);
 
 	while(1){
 		// Buffer containing one sample (left and right, both 16 bit).
-		int16_t f1_samples[2*BUFFER_SIZE];
-		int16_t f2_samples[2*BUFFER_SIZE];
-		int16_t out_buffer[2*BUFFER_SIZE];
-		unsigned cbBuffer=sizeof(f1_samples);	// size in bytes of 
+		int16_t * f1_samples;
+		int16_t * f2_samples;
+		int16_t * out_buffer;
+		
+		f1_samples = (int16_t *) calloc(2*BUFFER_SIZE, sizeof(int16_t));
+		f2_samples = (int16_t *) calloc(2*BUFFER_SIZE, sizeof(int16_t));
+		out_buffer = (int16_t *) calloc(2*BUFFER_SIZE, sizeof(int16_t));
+		unsigned cbBuffer=2*BUFFER_SIZE*sizeof(int16_t);	// size in bytes of 
 		
 		// Read one sample from input
-		int got1=fread(f1_samples, sizeof(int16_t), 2*BUFFER_SIZE, f1);
+		int got1=read(f1,f1_samples,cbBuffer);
 		if(got1<0){
 			fprintf(stderr, "%s : Read from %s failed, error=%s.", argv[0], argv[1], strerror(errno));
 			exit(1);
 		}else if(got1==0){
 			break;	 // end of file
-		}else if(got1!=cbBuffer){
-			fprintf(stderr, "%s : Did not receive expected number of bytes from %s.\n", argv[0], argv[1]);
-			exit(1);
 		}
 		
 
-		int got2;//=read(f2_samples, cbBuffer);
+		int got2=read(f2,f2_samples, cbBuffer);
                 if(got2<0){
-                        fprintf(stderr, "%s : Read from %s failed, error=%s.", argv[0], argv[1], strerror(errno));
+                        fprintf(stderr, "%s : Read from %s failed, error=%s.", argv[0], argv[2], strerror(errno));
                         exit(1);
                 }else if(got2==0){
                         break;   // end of file
-                }else if(got2!=cbBuffer){
-                        fprintf(stderr, "%s : Did not receive expected number of bytes from %s.\n", argv[0], argv[1]);
-                        exit(1);
                 }
 
+		for(int i=0;i<2*BUFFER_SIZE;i++)
+		{
+			out_buffer[i] = (f1_samples[i] + f2_samples[i])/2;
+		}
+
 		// Copy one sample to output
-		int done=write(STDOUT_FILENO, f1_samples, cbBuffer);
+		int done=write(STDOUT_FILENO, out_buffer, cbBuffer);
 		if(done<0){
 			fprintf(stderr, "%s : Write to stdout failed, error=%s.", argv[0], strerror(errno));
 			exit(1);
-		}else if(done!=cbBuffer){
-			fprintf(stderr, "%s : Could not read requested number of bytes from stream.\n", argv[0]);
 		}
 	}
-	fclose(f1);
-	fclose(f2);
+	close(f1);
+	close(f2);
 
 	return 0;
 }

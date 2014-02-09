@@ -30,16 +30,15 @@ int main(int argc, char *argv[])
     
     while(1){
         // Buffer containing one sample (left and right, both 16 bit).
-        int16_t samples[NO_SAMPLES];
+        int16_t samples[2*NO_SAMPLES];
         unsigned cbBuffer=sizeof(samples);      // size in bytes of
         
         // Generate sine samples
-	for(int i=0; i<NO_SAMPLES - 1; i++)
+	for(int i=0; i<NO_SAMPLES; i++)
 	{
-        	samples[i] = (int16_t)30000*sin((2 * PI * freq * t)/SAMPLE_FREQ);
-        	samples[i+1] = samples[i];
+        	samples[2*i] = (int16_t)30000*sin((2 * PI * freq * t)/SAMPLE_FREQ);
+        	samples[(2*i)+1] = samples[2*i];
         	t++;
-		i++;
         }
         // Copy one sample to output
         int done=write(STDOUT_FILENO, samples, cbBuffer);
